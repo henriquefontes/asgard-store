@@ -11,11 +11,12 @@ type ButtonProps = {
       background: string;
     };
   };
+  link?: string;
 };
 
 export default function Button(props: ButtonProps) {
   const [isHover, setIsHover] = useState(false);
-  const { colors, style, children } = props;
+  const { colors, style, children, link } = props;
   const colorChangeOnHover = colors?.hover?.background;
   const { background: backgroundColor, text: textColor } = colors;
   const { text: textHoverColor, background: backgroundHoverColor } =
@@ -28,7 +29,7 @@ export default function Button(props: ButtonProps) {
     setIsHover(false);
   }
 
-  return (
+  const buttonElement = (
     <button
       style={{
         width: "fit-content",
@@ -62,4 +63,6 @@ export default function Button(props: ButtonProps) {
       {children}
     </button>
   );
+
+  return link ? <a href={link}>{buttonElement}</a> : buttonElement;
 }
